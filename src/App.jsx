@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import DotIndicator from './components/DotIndicator'
+import ShaderBackground from './components/ShaderBackground'
 import HeroSection from './components/HeroSection'
 import AboutSection from './components/AboutSection'
 import SkillsSection from './components/SkillsSection'
@@ -20,7 +21,7 @@ export default function App() {
           }
         })
       },
-      { threshold: 0.5 }
+      { threshold: 0.2, rootMargin: '-80px 0px -20% 0px' }
     )
 
     sections.forEach((section) => observer.observe(section))
@@ -28,9 +29,10 @@ export default function App() {
   }, [])
 
   return (
-    <div className="bg-surface font-body-md text-on-surface select-none">
+    <div className="bg-surface font-body-md text-on-surface select-none relative">
+      <ShaderBackground />
       <DotIndicator activeSection={activeSection} />
-      <main className="w-full">
+      <main className="w-full relative z-10">
         <HeroSection />
         <AboutSection />
         <SkillsSection />

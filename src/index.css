@@ -11,20 +11,25 @@
     overscroll-behavior: none;
   }
   html {
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
   }
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 6px;
 }
 
-.section-snap {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  height: 100vh;
-  width: 100%;
+::-webkit-scrollbar-track {
+  background: #f8f9fd;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c4c6d2;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #747781;
 }
 
 .material-symbols-outlined {

@@ -1,24 +1,26 @@
 const contactLinks = [
   {
-    href: 'mailto:contact@johnkennethpitel.com',
+    href: 'mailto:johnkennethpitel0@gmail.com',
     icon: 'alternate_email',
     title: 'Email',
-    subtitle: 'Direct Inquiry',
+    subtitle: 'johnkennethpitel0@gmail.com',
     isLink: true,
   },
   {
-    href: '#',
+    href: 'https://github.com/qwertech92',
     icon: 'code',
     title: 'GitHub',
-    subtitle: 'Repository Access',
+    subtitle: 'github.com/qwertech92',
     isLink: true,
+    external: true,
   },
   {
-    href: '#',
+    href: 'https://www.linkedin.com/in/john-kenneth-pitel-032b02428/',
     icon: 'diversity_3',
     title: 'LinkedIn',
-    subtitle: 'Professional Network',
+    subtitle: 'john-kenneth-pitel',
     isLink: true,
+    external: true,
   },
 ]
 
@@ -26,7 +28,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="section-snap relative w-full h-screen flex flex-col justify-center items-center bg-surface px-4 lg:px-[48px] overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center items-center bg-surface px-4 lg:px-[48px] overflow-hidden py-24"
     >
       {/* Dot grid background */}
       <div
@@ -54,7 +56,7 @@ export default function ContactSection() {
             Get in Touch
           </h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[500px]">
-            Available for complex engineering challenges, technical leadership roles, and collaborative architectural discussions.
+            Open to internship opportunities, project collaborations, and technical discussions.
           </p>
         </div>
 
@@ -69,6 +71,8 @@ export default function ContactSection() {
             <a
               key={link.title}
               href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
               className="group relative flex flex-col items-center gap-3 p-8 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -103,7 +107,7 @@ export default function ContactSection() {
         {/* Footer info */}
         <div className="mt-8 flex flex-col items-center gap-2">
           <p className="font-technical-label text-technical-label text-on-surface-variant">
-            John Kenneth Pitel © 2024
+            John Kenneth Pitel © 2025
           </p>
           <div className="flex items-center gap-4 text-outline">
             <span className="font-code-sm text-code-sm">SYS.VER_2.4.1</span>

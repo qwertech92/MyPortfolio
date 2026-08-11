@@ -2,32 +2,32 @@ const skillCategories = [
   {
     title: 'Languages',
     icon: 'code',
-    skills: ['C++', 'Python', 'TypeScript', 'Go'],
+    skills: ['JavaScript', 'Java', 'C#', 'C++', 'PHP', 'SQL', 'VB.NET'],
   },
   {
-    title: 'Web',
+    title: 'Frameworks & Libraries',
     icon: 'language',
-    skills: ['React', 'Next.js', 'Node.js', 'TailwindCSS'],
-  },
-  {
-    title: 'Mobile',
-    icon: 'smartphone',
-    skills: ['React Native', 'Flutter', 'Swift'],
+    skills: ['React', 'Node.js', 'Express'],
   },
   {
     title: 'Databases',
     icon: 'database',
-    skills: ['PostgreSQL', 'MongoDB', 'Redis', 'DynamoDB'],
+    skills: ['MySQL', 'Firebase', 'Oracle', 'PostgreSQL'],
   },
   {
-    title: 'IoT',
-    icon: 'router',
-    skills: ['Arduino', 'Raspberry Pi', 'MQTT', 'FreeRTOS'],
+    title: 'Embedded & IoT',
+    icon: 'memory',
+    skills: ['ESP32', 'Arduino', 'Sensor Integration'],
   },
   {
     title: 'Tools',
     icon: 'build',
-    skills: ['Git', 'Docker', 'AWS', 'Figma'],
+    skills: ['Git', 'GitHub', 'Postman', 'Docker'],
+  },
+  {
+    title: 'Concepts',
+    icon: 'lightbulb',
+    skills: ['REST APIs', 'System Design'],
   },
 ]
 
@@ -44,7 +44,7 @@ function SkillPill({ name, index }) {
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="section-snap flex flex-col w-full px-4 lg:px-[48px] pt-16">
+    <section id="skills" className="relative flex flex-col w-full px-4 lg:px-[48px] py-24">
       <div className="w-full max-w-[1200px] mx-auto pb-24">
         {/* Header */}
         <div className="flex flex-col lg:flex-row gap-12 items-center justify-between mb-24 relative mt-16">

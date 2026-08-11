@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section id="about" className="section-snap flex flex-col w-full px-4 lg:px-[48px] py-12 lg:py-24">
+    <section id="about" className="relative flex flex-col w-full px-4 lg:px-[48px] py-24">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-[1200px] mx-auto w-full">
         {/* Left Column */}
         <div className="lg:col-span-6 flex flex-col gap-8">

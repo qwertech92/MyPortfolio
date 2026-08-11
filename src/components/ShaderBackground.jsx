@@ -23,20 +23,43 @@ void main() {
     // Subtle Dark Blue for pattern
     vec3 accentColor = vec3(0.043, 0.176, 0.420); // #0B2D6B
     
-    // Dot grid pattern
+    // Dot grid pattern - finer and more subtle
     float dots = 0.0;
-    vec2 dotPos = fract(uv * 20.0) - 0.5;
+    vec2 dotPos = fract(uv * 30.0) - 0.5;
     float dist = length(dotPos);
-    dots = smoothstep(0.04, 0.03, dist);
+    dots = smoothstep(0.03, 0.02, dist);
     
-    // Thin circuit-like lines
+    // Circuit-like lines with subtle animation
     float lines = 0.0;
-    lines += smoothstep(0.002, 0.0, abs(uv.x - 0.2)) * step(0.1, uv.y) * step(uv.y, 0.9);
-    lines += smoothstep(0.002, 0.0, abs(uv.y - 0.8)) * step(0.2, uv.x) * step(uv.x, 0.5);
-    lines += smoothstep(0.002, 0.0, abs(uv.x - 0.5)) * step(0.6, uv.y) * step(uv.y, 0.85);
     
-    // Combine patterns with very low opacity
-    float pattern = (dots * 0.3 + lines * 0.7) * 0.035;
+    // Horizontal lines
+    lines += smoothstep(0.0015, 0.0, abs(uv.y - 0.15)) * step(0.05, uv.x) * step(uv.x, 0.35);
+    lines += smoothstep(0.0015, 0.0, abs(uv.y - 0.85)) * step(0.6, uv.x) * step(uv.x, 0.95);
+    lines += smoothstep(0.0015, 0.0, abs(uv.y - 0.5)) * step(0.7, uv.x) * step(uv.x, 0.9);
+    
+    // Vertical lines
+    lines += smoothstep(0.0015, 0.0, abs(uv.x - 0.15)) * step(0.1, uv.y) * step(uv.y, 0.4);
+    lines += smoothstep(0.0015, 0.0, abs(uv.x - 0.35)) * step(0.15, uv.y) * step(uv.y, 0.6);
+    lines += smoothstep(0.0015, 0.0, abs(uv.x - 0.85)) * step(0.5, uv.y) * step(uv.y, 0.85);
+    lines += smoothstep(0.0015, 0.0, abs(uv.x - 0.6)) * step(0.6, uv.y) * step(uv.y, 0.85);
+    
+    // Small node circles at line intersections
+    float nodes = 0.0;
+    nodes += smoothstep(0.006, 0.004, length(uv - vec2(0.15, 0.15)));
+    nodes += smoothstep(0.006, 0.004, length(uv - vec2(0.35, 0.15)));
+    nodes += smoothstep(0.006, 0.004, length(uv - vec2(0.15, 0.4)));
+    nodes += smoothstep(0.006, 0.004, length(uv - vec2(0.85, 0.85)));
+    nodes += smoothstep(0.006, 0.004, length(uv - vec2(0.6, 0.85)));
+    nodes += smoothstep(0.006, 0.004, length(uv - vec2(0.85, 0.5)));
+    nodes += smoothstep(0.006, 0.004, length(uv - vec2(0.9, 0.85)));
+    
+    // Subtle animated pulse on nodes
+    float pulse = sin(u_time * 1.5) * 0.5 + 0.5;
+    nodes *= (0.7 + 0.3 * pulse);
+    
+    // Combine patterns with very low opacity for subtlety
+    float pattern = dots * 0.15 + lines * 0.4 + nodes * 0.6;
+    pattern *= 0.06;
     
     color = mix(color, accentColor, pattern);
     
@@ -123,7 +146,7 @@ export default function ShaderBackground() {
   }, [])
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden opacity-30 mix-blend-multiply">
+    <div className="fixed inset-0 w-full h-full z-0 overflow-hidden opacity-40 pointer-events-none">
       <canvas
         ref={canvasRef}
         className="block w-full h-full"

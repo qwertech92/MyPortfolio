@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import ShaderBackground from './ShaderBackground'
 
 export default function HeroSection() {
   const headlineRef = useRef(null)
@@ -35,8 +34,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section id="home" className="section-snap relative flex flex-col justify-center">
-      <ShaderBackground />
+    <section id="home" className="relative min-h-screen flex flex-col justify-center">
 
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 lg:px-[48px] grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         {/* Left Column */}
@@ -72,14 +70,14 @@ export default function HeroSection() {
               transitionDelay: '600ms',
             }}
           >
-            <button className="bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-technical-label text-technical-label px-6 py-3 rounded transition-colors shadow-sm hover:shadow-md flex items-center justify-center gap-2 group">
-              <span className="material-symbols-outlined text-[20px] group-hover:-translate-y-1 transition-transform">download</span>
-              DOWNLOAD RESUME
-            </button>
-            <button className="bg-transparent border border-outline hover:border-primary text-on-surface hover:text-primary font-technical-label text-technical-label px-6 py-3 rounded transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 group">
+            <a href="#projects" className="bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-technical-label text-technical-label px-6 py-3 rounded transition-colors shadow-sm hover:shadow-md flex items-center justify-center gap-2 group">
               VIEW PROJECTS
               <span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-            </button>
+            </a>
+            <a href="#contact" className="bg-transparent border border-outline hover:border-primary text-on-surface hover:text-primary font-technical-label text-technical-label px-6 py-3 rounded transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 group">
+              <span className="material-symbols-outlined text-[20px]">mail</span>
+              CONTACT ME
+            </a>
           </div>
         </div>
 
@@ -101,11 +99,18 @@ export default function HeroSection() {
             </p>
 
             <ul className="flex flex-col gap-4 font-technical-label text-technical-label text-on-surface-variant">
-              {['ABOUT', 'SKILLS', 'PROJECTS', 'CONTACT'].map((label, i) => (
-                <li key={label} className="flex items-center gap-4 group cursor-pointer hover:text-primary transition-colors">
-                  <span className="text-primary/50 text-code-sm">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="w-8 h-px bg-outline-variant group-hover:bg-primary group-hover:w-12 transition-all" />
-                  {label}
+              {[
+                { label: 'ABOUT', href: '#about' },
+                { label: 'SKILLS', href: '#skills' },
+                { label: 'PROJECTS', href: '#projects' },
+                { label: 'CONTACT', href: '#contact' },
+              ].map((item, i) => (
+                <li key={item.label}>
+                  <a href={item.href} className="flex items-center gap-4 group cursor-pointer hover:text-primary transition-colors">
+                    <span className="text-primary/50 text-code-sm">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="w-8 h-px bg-outline-variant group-hover:bg-primary group-hover:w-12 transition-all" />
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
