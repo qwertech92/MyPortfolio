@@ -1,75 +1,36 @@
 import { useState } from 'react'
-
-const projects = [
-  {
-    id: 'erbriwan',
-    title: 'ERBriwan',
-    subtitle: 'IoT / Web App • 2023',
-    icon: 'memory',
-    tags: ['ESP32', 'Node.js'],
-    problem: 'Inefficient remote monitoring of distributed agricultural systems leading to resource waste and delayed response times.',
-    solution: 'Developed an integrated IoT platform utilizing ESP32 microcontrollers to gather real-time sensor data, transmitted via MQTT to a central dashboard for automated irrigation control and analytics.',
-    role: ['Hardware Prototyping', 'Firmware Development (C++)', 'Backend Architecture (Node.js)', 'Dashboard UI/UX'],
-    architecture: [
-      { icon: 'sensors', label: 'ESP32 + Sensors' },
-      { connector: 'MQTT' },
-      { icon: 'dns', label: 'Node.js Server' },
-      { connector: 'REST API' },
-      { icon: 'database', label: 'MongoDB' },
-      { connector: 'WebSockets' },
-      { icon: 'desktop_windows', label: 'Web App' },
-    ],
-  },
-  {
-    id: 'sentrygas',
-    title: 'SentryGas',
-    subtitle: 'IoT Safety System • 2022',
-    icon: 'local_fire_department',
-    tags: ['Arduino', 'React'],
-    problem: null,
-    solution: null,
-    role: null,
-    architecture: null,
-  },
-  {
-    id: 'barangay',
-    title: 'Barangay Admin System',
-    subtitle: 'Full-Stack Web • 2024',
-    icon: 'folder_managed',
-    tags: ['PHP', 'MySQL'],
-    problem: null,
-    solution: null,
-    role: null,
-    architecture: null,
-  },
-]
+import { projects } from '../data/projects'
 
 function ArchitectureDiagram({ architecture }) {
   if (!architecture) return null
-
   return (
-    <div className="flex flex-col gap-4 mt-4">
-      <h4 className="font-technical-label text-technical-label text-on-surface uppercase tracking-widest flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-primary inline-block" /> System Architecture
+    <div className="flex flex-col gap-3 mt-6">
+      <h4 className="font-technical-label text-technical-label text-primary uppercase tracking-widest flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-primary" />
+        System Architecture
       </h4>
-      <div className="w-full h-auto p-6 bg-surface-container border border-outline-variant rounded flex items-center justify-between overflow-x-auto gap-4">
+      <div className="w-full p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center justify-between overflow-x-auto gap-3">
         {architecture.map((item, i) => {
           if (item.connector) {
             return (
-              <div key={i} className="flex-1 h-px bg-outline-variant relative min-w-[60px]">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-outline-variant rotate-45" />
-                <span className="absolute top-[-20px] left-1/2 -translate-x-1/2 font-code-sm text-[10px] text-outline whitespace-nowrap">
+              <div key={i} className="flex-1 min-w-[50px] flex flex-col items-center gap-1">
+                <span className="font-code-sm text-[10px] text-outline whitespace-nowrap">
                   {item.connector}
                 </span>
+                <div className="w-full h-px bg-outline-variant relative">
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-outline-variant rotate-45" />
+                </div>
               </div>
             )
           }
           return (
-            <div key={i} className="flex flex-col items-center gap-2 min-w-[120px]">
-              <div className="w-16 h-16 rounded-full bg-surface border-2 border-primary flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary">{item.icon}</span>
+            <div key={i} className="flex flex-col items-center gap-2 min-w-[80px]">
+              <div className="w-12 h-12 rounded-full bg-surface border-2 border-primary flex items-center justify-center">
+                <span className="material-symbols-outlined text-primary text-[20px]">{item.icon}</span>
               </div>
-              <span className="font-code-sm text-code-sm text-on-surface-variant text-center">{item.label}</span>
+              <span className="font-code-sm text-[11px] text-on-surface-variant text-center leading-tight">
+                {item.label}
+              </span>
             </div>
           )
         })}
@@ -78,116 +39,207 @@ function ArchitectureDiagram({ architecture }) {
   )
 }
 
-function ProjectCard({ project, isOpen, onToggle }) {
+function ProjectModal({ project, onClose }) {
+  if (!project) return null
   return (
     <div
-      className={`group bg-surface-container-lowest border ${isOpen ? 'border-primary' : 'border-outline-variant'} hover:border-primary transition-colors duration-300 rounded-lg overflow-hidden flex flex-col cursor-pointer`}
-      onClick={onToggle}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-on-surface/50 backdrop-blur-sm"
+      onClick={onClose}
     >
-      {/* Card Header */}
-      <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-6">
-          <div className="w-12 h-12 rounded bg-surface-container flex items-center justify-center shrink-0 border border-outline-variant group-hover:bg-primary group-hover:border-primary transition-colors">
-            <span className="material-symbols-outlined text-[28px] text-primary group-hover:text-on-primary transition-colors">
-              {project.icon}
-            </span>
+      <div
+        className="bg-surface rounded-xl border border-outline-variant shadow-2xl w-full max-w-3xl max-h-[85vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Header */}
+        <div className="sticky top-0 bg-surface border-b border-outline-variant p-6 flex items-center justify-between z-10">
+          <div>
+            <h3 className="font-headline-md text-headline-md text-on-surface">{project.title}</h3>
+            <span className="font-technical-label text-technical-label text-on-surface-variant">{project.date}</span>
           </div>
-          <div className="flex flex-col gap-1">
-            <h3 className="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
-              {project.title}
-            </h3>
-            <span className="font-technical-label text-technical-label text-on-surface-variant uppercase tracking-widest">
-              {project.subtitle}
-            </span>
-          </div>
+          <button onClick={onClose} className="p-2 hover:bg-surface-container rounded-lg transition-colors" aria-label="Close modal">
+            <span className="material-symbols-outlined text-on-surface-variant">close</span>
+          </button>
         </div>
-        <div className="flex gap-2 items-center">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 bg-surface-container border border-outline-variant rounded font-code-sm text-code-sm text-on-surface-variant"
-            >
-              {tag}
-            </span>
-          ))}
-          <span
-            className={`material-symbols-outlined text-outline-variant group-hover:text-primary transition-all self-center ml-4 duration-300 ${isOpen ? 'rotate-180' : ''}`}
-          >
-            expand_more
-          </span>
+
+        <div className="p-6 flex flex-col gap-8">
+          {/* Overview */}
+          <div>
+            <h4 className="font-technical-label text-technical-label text-primary uppercase tracking-widest mb-3">Overview</h4>
+            <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">{project.overview}</p>
+          </div>
+
+          {/* Problem & Solution */}
+          {project.problem && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-surface-container-low border border-outline-variant rounded-lg p-5">
+                <h4 className="font-technical-label text-technical-label text-on-surface uppercase mb-3">Problem</h4>
+                <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">{project.problem}</p>
+              </div>
+              <div className="bg-surface-container-low border border-outline-variant rounded-lg p-5">
+                <h4 className="font-technical-label text-technical-label text-on-surface uppercase mb-3">Solution</h4>
+                <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">{project.solution}</p>
+              </div>
+            </div>
+          )}
+
+          {/* My Role */}
+          {project.role && (
+            <div>
+              <h4 className="font-technical-label text-technical-label text-primary uppercase tracking-widest mb-3">My Role</h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {project.role.map((r) => (
+                  <li key={r} className="flex items-start gap-2 font-body-md text-body-md text-on-surface-variant">
+                    <span className="material-symbols-outlined text-primary text-[16px] mt-0.5">check_circle</span>
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Technologies */}
+          <div>
+            <h4 className="font-technical-label text-technical-label text-primary uppercase tracking-widest mb-3">Technologies</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <span key={tech} className="px-3 py-1.5 bg-surface-container border border-outline-variant rounded-lg font-technical-label text-[12px] text-on-surface">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Features */}
+          {project.features && (
+            <div>
+              <h4 className="font-technical-label text-technical-label text-primary uppercase tracking-widest mb-3">Key Features</h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {project.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2 font-body-md text-body-md text-on-surface-variant">
+                    <span className="material-symbols-outlined text-outline text-[16px] mt-0.5">arrow_right</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Architecture */}
+          <ArchitectureDiagram architecture={project.architecture} />
+
+          {/* Screenshot Placeholder */}
+          <div className="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center gap-3 bg-surface-container-low">
+            <span className="material-symbols-outlined text-[40px] text-outline-variant">image</span>
+            <span className="font-technical-label text-technical-label text-on-surface-variant">Project screenshots / media placeholder</span>
+          </div>
         </div>
       </div>
+    </div>
+  )
+}
 
-      {/* Card Detail */}
-      {isOpen && (
-        <div className="border-t border-outline-variant">
-          <div className="p-6 md:p-8 flex flex-col gap-8 bg-surface-bright">
-            {project.problem ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="md:col-span-2 flex flex-col gap-4">
-                  <h4 className="font-body-md text-body-md font-semibold text-on-surface uppercase">The Problem</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">{project.problem}</p>
-                  <h4 className="font-body-md text-body-md font-semibold text-on-surface uppercase mt-4">The Solution</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">{project.solution}</p>
-                </div>
-                {project.role && (
-                  <div className="flex flex-col gap-4 p-6 bg-surface-container-low border border-outline-variant rounded">
-                    <h4 className="font-technical-label text-technical-label text-primary uppercase">My Role</h4>
-                    <ul className="font-body-md text-body-md text-on-surface-variant space-y-2 list-disc list-inside">
-                      {project.role.map((r) => (
-                        <li key={r}>{r}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                {project.title} details...
-              </p>
-            )}
-            <ArchitectureDiagram architecture={project.architecture} />
+function ProjectCard({ project, onViewDetails }) {
+  return (
+    <div className="group bg-surface border border-outline-variant rounded-xl overflow-hidden hover:border-primary/40 hover:shadow-md transition-all duration-300">
+      {/* Image Placeholder */}
+      <div className="h-48 bg-surface-container flex items-center justify-center border-b border-outline-variant relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#001947 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+        <div className="flex flex-col items-center gap-2 z-10">
+          <span className="material-symbols-outlined text-[36px] text-on-surface-variant/40">image</span>
+          <span className="font-code-sm text-code-sm text-on-surface-variant/50">Preview</span>
+        </div>
+        {project.featured && (
+          <span className="absolute top-3 right-3 px-2 py-0.5 bg-primary text-on-primary font-code-sm text-[11px] rounded">
+            Featured
+          </span>
+        )}
+      </div>
+
+      {/* Card Content */}
+      <div className="p-6 flex flex-col gap-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="font-headline-md text-[20px] text-on-surface group-hover:text-primary transition-colors font-semibold">
+              {project.title}
+            </h3>
+            <span className="font-technical-label text-[12px] text-on-surface-variant uppercase tracking-widest">
+              {project.category} • {project.date.split('–')[0].trim().split(' ').pop()}
+            </span>
           </div>
         </div>
-      )}
+
+        <p className="font-body-md text-body-md text-on-surface-variant line-clamp-2 leading-relaxed">
+          {project.overview}
+        </p>
+
+        {/* Tech Tags */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.technologies.slice(0, 4).map((tech) => (
+            <span key={tech} className="px-2 py-0.5 bg-surface-container border border-outline-variant rounded font-code-sm text-[11px] text-on-surface-variant">
+              {tech}
+            </span>
+          ))}
+          {project.technologies.length > 4 && (
+            <span className="px-2 py-0.5 text-on-surface-variant font-code-sm text-[11px]">
+              +{project.technologies.length - 4}
+            </span>
+          )}
+        </div>
+
+        <button
+          onClick={() => onViewDetails(project)}
+          className="mt-auto flex items-center gap-2 text-primary font-technical-label text-technical-label hover:gap-3 transition-all group/btn"
+        >
+          View Details
+          <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </button>
+      </div>
     </div>
   )
 }
 
 export default function ProjectsSection() {
-  const [openProject, setOpenProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState(null)
 
   return (
-    <section id="projects" className="section-snap flex flex-col w-full px-4 lg:px-[48px] py-16 relative overflow-hidden">
-      {/* Dot grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-5 z-0"
-        style={{
-          backgroundImage: 'radial-gradient(#191c1f 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
-        }}
-      />
+    <>
+      <section id="projects" className="py-24 section-padding bg-surface relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(#191c1f 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto flex flex-col gap-4 mb-8">
-        <div className="flex items-center gap-4">
-          <div className="h-1 w-12 bg-primary" />
-          <h2 className="font-headline-md text-headline-md text-on-surface uppercase tracking-wider">Project Portfolio</h2>
+        <div className="section-container relative z-10">
+          {/* Section Header */}
+          <div className="flex flex-col gap-4 mb-16">
+            <div className="flex items-center gap-4">
+              <div className="h-1 w-10 bg-primary rounded" />
+              <span className="font-technical-label text-technical-label text-primary uppercase tracking-widest">
+                Project Portfolio
+              </span>
+            </div>
+            <h2 className="font-display-lg text-display-lg text-on-surface tracking-tight">
+              What I've Built
+            </h2>
+            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+              Academic projects spanning IoT systems, web applications, mobile development, and embedded hardware — each solving a real-world problem.
+            </p>
+          </div>
+
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onViewDetails={setSelectedProject}
+              />
+            ))}
+          </div>
         </div>
-        <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-          A curated selection of technical solutions, spanning IoT hardware integration to full-stack web applications.
-        </p>
-      </div>
+      </section>
 
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto flex flex-col gap-6">
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            isOpen={openProject === project.id}
-            onToggle={() => setOpenProject(openProject === project.id ? null : project.id)}
-          />
-        ))}
-      </div>
-    </section>
+      {/* Modal */}
+      {selectedProject && (
+        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      )}
+    </>
   )
 }
