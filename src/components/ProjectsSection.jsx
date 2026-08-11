@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import ProjectGallery from './ProjectGallery'
+import { projectImages } from '../data/projectImages'
 
 const projects = [
   {
@@ -315,6 +317,9 @@ function ProjectCard({ project, isOpen, onToggle }) {
 
             {/* Architecture */}
             <ArchitectureDiagram architecture={project.architecture} />
+
+            {/* Project Screenshots */}
+            <ProjectGallery images={projectImages[project.id] || []} />
           </div>
         </div>
       )}
