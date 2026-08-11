@@ -65,7 +65,7 @@ export const projectImages = {
     {
       src: '/projects/SentryGas/entryg2.jpg',
       alt: 'SentryGas hardware safety system assembly',
-      caption: 'Hardware Assembly',
+      caption: 'Team',
     },
     {
       src: '/projects/SentryGas/sentrygweb1.png',
