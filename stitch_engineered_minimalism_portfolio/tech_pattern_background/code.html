@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+<svg class="fixed inset-0 w-full h-full pointer-events-none -z-10" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="32" id="dot-grid" patternunits="userSpaceOnUse" width="32">
+<circle cx="16" cy="16" fill="#0B2D6B" opacity="0.1" r="1.5"></circle>
+</pattern>
+<pattern height="160" id="tech-icons" patternunits="userSpaceOnUse" width="160">
+<g fill="none" opacity="0.04" stroke="#0B2D6B" stroke-width="1.5">
+<!-- CPU Chip -->
+<rect height="24" rx="2" width="24" x="24" y="24"></rect>
+<path d="M24 30h-4m4 6h-4m4 6h-4m28-12h4m-4 6h4m-4 6h4m-18-18v-4m6 4v-4m6 4v-4m-12 28v4m6-4v4m6-4v4"></path>
+<!-- Code Brackets -->
+<path d="M120 32l-8 12 8 12m16-24l8 12-8 12"></path>
+<!-- Circuit Node -->
+<circle cx="32" cy="120" r="4"></circle>
+<path d="M36 120h16l12-12v-16"></path>
+<circle cx="64" cy="88" r="4"></circle>
+<!-- Sensor/Database -->
+<ellipse cx="120" cy="120" rx="12" ry="4"></ellipse>
+<path d="M108 120v12c0 2.2 5.4 4 12 4s12-1.8 12-4v-12"></path>
+<path d="M108 126c0 2.2 5.4 4 12 4s12-1.8 12-4"></path>
+</g>
+</pattern>
+</defs>
+<rect fill="url(#dot-grid)" height="100%" width="100%"></rect>
+<rect fill="url(#tech-icons)" height="100%" width="100%"></rect>
+</svg>
+</body></html>
