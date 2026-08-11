@@ -13,6 +13,41 @@ const skills = [
   'Continuous Learning',
 ]
 
+const currentlyLearning = [
+  {
+    label: 'Python',
+    description: 'Scripting, automation, backend development, and AI-related applications.',
+  },
+  {
+    label: 'Cloud Computing',
+    description: 'Cloud infrastructure, services, deployment, scalability, and serverless concepts.',
+  },
+  {
+    label: 'APIs & API Development',
+    description: 'REST API design, authentication, authorization, security, and external service integration.',
+  },
+  {
+    label: 'Backend Architecture',
+    description: 'Scalable systems, WebSockets, caching, message queues, event-driven architecture, and microservices.',
+  },
+  {
+    label: 'DevOps',
+    description: 'Linux, Docker, CI/CD, GitHub Actions, automated deployment, monitoring, and infrastructure.',
+  },
+  {
+    label: 'AI Integration',
+    description: 'AI APIs, LLM integration, chatbots, structured responses, tool calling, and AI-powered features.',
+  },
+  {
+    label: 'AI Automation',
+    description: 'Automating workflows, data processing, API orchestration, and developer tasks with AI.',
+  },
+  {
+    label: 'Modern AI Technologies',
+    description: 'LLMs, RAG, embeddings, vector databases, AI agents, and agentic workflows.',
+  },
+]
+
 const hobbies = [
   { label: 'Working Out', icon: 'fitness_center' },
   { label: 'Movies & Series', icon: 'movie' },
@@ -111,6 +146,32 @@ export default function AboutSection() {
               >
                 {skill}
               </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Currently Learning Section */}
+        <div className="flex flex-col gap-5">
+          <h3 className="font-technical-label text-technical-label text-primary uppercase tracking-widest flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            Currently Learning
+          </h3>
+          <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+            Technologies and concepts I'm actively studying and experimenting with.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {currentlyLearning.map((item) => (
+              <div
+                key={item.label}
+                className="flex flex-col gap-2 p-4 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-primary/30 transition-colors group"
+              >
+                <span className="font-technical-label text-[12px] text-primary group-hover:text-primary transition-colors">
+                  {item.label}
+                </span>
+                <span className="font-body-md text-[12px] text-on-surface-variant leading-relaxed">
+                  {item.description}
+                </span>
+              </div>
             ))}
           </div>
         </div>
