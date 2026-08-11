@@ -3,57 +3,34 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
+  html, body {
     margin: 0;
     padding: 0;
-    overscroll-behavior-y: none;
   }
-
-  ::selection {
-    background-color: #0b2d6b;
-    color: #ffffff;
+  body {
+    overscroll-behavior: none;
   }
-}
-
-@layer components {
-  .section-padding {
-    @apply px-4 md:px-8 lg:px-12;
-  }
-
-  .section-container {
-    @apply w-full max-w-[1200px] mx-auto;
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
   }
 }
 
-/* Material Symbols */
+::-webkit-scrollbar {
+  display: none;
+}
+
+.section-snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  height: 100vh;
+  width: 100%;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 0,
     'wght' 400,
     'GRAD' 0,
     'opsz' 24;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f8f9fd;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c4c6d2;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #747781;
 }
