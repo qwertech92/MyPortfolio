@@ -9,6 +9,11 @@ export const projectImages = {
       caption: 'IoT Hardware — ESP32 + GPS Module',
     },
     {
+      src: '/projects/ERBriwan/erb1group.jpg',
+      alt: 'ERBriwan development team group photo',
+      caption: 'Development Team',
+    },
+    {
       src: '/projects/ERBriwan/erbwebapp1.png',
       alt: 'ERBriwan web application dashboard',
       caption: 'Web Application Dashboard',

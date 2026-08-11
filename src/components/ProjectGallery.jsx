@@ -101,7 +101,7 @@ export default function ProjectGallery({ images }) {
   return (
     <div className="flex flex-col gap-4 mt-6">
       <h4 className="font-technical-label text-technical-label text-on-surface uppercase tracking-widest flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-primary inline-block" /> Project Screenshots
+        <span className="w-2 h-2 rounded-full bg-primary inline-block" /> Project Gallery
       </h4>
 
       {/* Gallery Grid */}
