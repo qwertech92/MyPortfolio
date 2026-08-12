@@ -1,4 +1,4 @@
-const sections = ['home', 'about', 'skills', 'certifications', 'projects', 'contact', 'send-message']
+const sections = ['home', 'about', 'skills', 'projects', 'certifications', 'contact', 'send-message']
 
 export default function DotIndicator({ activeSection = 'home' }) {
   return (

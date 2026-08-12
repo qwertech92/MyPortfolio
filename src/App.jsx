@@ -38,8 +38,8 @@ export default function App() {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
-        <CertificationsSection />
         <ProjectsSection />
+        <CertificationsSection />
         <ContactSection />
         <SendMessageSection />
       </main>
