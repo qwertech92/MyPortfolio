@@ -1,27 +1,30 @@
-import 'dotenv/config'
-import express from 'express'
-import cors from 'cors'
 import nodemailer from 'nodemailer'
 
-const app = express()
-const PORT = process.env.PORT || 3001
-
-// Middleware
-app.use(express.json())
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
-    methods: ['POST'],
-  })
-)
-
-// Rate limiting (simple in-memory)
+// Rate limiting (in-memory, resets on cold start)
 const rateLimitMap = new Map()
-const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
-const RATE_LIMIT_MAX = 3 // max 3 requests per minute per IP
+const RATE_LIMIT_WINDOW = 60 * 1000
+const RATE_LIMIT_MAX = 3
 
-function rateLimit(req, res, next) {
-  const ip = req.ip || req.connection.remoteAddress
+export default async function handler(req, res) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*')
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
+
+  if (req.method === 'GET') {
+    return res.status(200).json({ message: 'Contact API is running. Use POST to send a message.' })
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed.' })
+  }
+
+  // Rate limiting
+  const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown'
   const now = Date.now()
   const requests = rateLimitMap.get(ip) || []
   const recentRequests = requests.filter((t) => now - t < RATE_LIMIT_WINDOW)
@@ -29,33 +32,9 @@ function rateLimit(req, res, next) {
   if (recentRequests.length >= RATE_LIMIT_MAX) {
     return res.status(429).json({ error: 'Too many requests. Please wait a moment before trying again.' })
   }
-
   recentRequests.push(now)
   rateLimitMap.set(ip, recentRequests)
-  next()
-}
 
-// Email transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.EMAIL_PORT || '587'),
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-})
-
-// Verify transporter on startup
-transporter.verify().then(() => {
-  console.log('Email transporter is ready')
-}).catch((err) => {
-  console.warn('Email transporter verification failed:', err.message)
-  console.warn('Make sure EMAIL_USER and EMAIL_PASS are set in .env')
-})
-
-// Contact endpoint
-app.post('/api/contact', rateLimit, async (req, res) => {
   const { name, email, subject, message } = req.body
 
   // Validation
@@ -80,6 +59,16 @@ app.post('/api/contact', rateLimit, async (req, res) => {
   }
 
   try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+      port: parseInt(process.env.EMAIL_PORT || '587'),
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    })
+
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.CONTACT_EMAIL,
@@ -103,18 +92,4 @@ app.post('/api/contact', rateLimit, async (req, res) => {
     console.error('Email send error:', err.message)
     return res.status(500).json({ error: 'Failed to send message. Please try again later.' })
   }
-})
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' })
-})
-
-// Info for GET on contact endpoint
-app.get('/api/contact', (req, res) => {
-  res.json({ message: 'Contact API is running. Use POST to send a message.' })
-})
-
-app.listen(PORT, () => {
-  console.log(`Contact API server running on port ${PORT}`)
-})
+}
