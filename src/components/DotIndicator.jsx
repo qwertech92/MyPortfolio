@@ -1,4 +1,4 @@
-const sections = ['home', 'about', 'skills', 'projects', 'contact']
+const sections = ['home', 'about', 'skills', 'certifications', 'projects', 'contact', 'send-message']
 
 export default function DotIndicator({ activeSection = 'home' }) {
   return (
@@ -11,7 +11,7 @@ export default function DotIndicator({ activeSection = 'home' }) {
           key={section}
           href={`#${section}`}
           aria-label={`Go to ${section}`}
-          title={section.charAt(0).toUpperCase() + section.slice(1)}
+          title={section.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
           className={`w-3 h-3 rounded-full border transition-all duration-300 ${
             activeSection === section
               ? 'bg-primary border-primary scale-110'

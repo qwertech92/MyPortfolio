@@ -1,76 +1,62 @@
 const skills = [
-  'Problem Solving',
-  'System Development',
-  'Web Development',
-  'Mobile Development',
-  'Backend Development',
-  'IoT Development',
-  'Embedded Systems',
-  'API Integration',
-  'Database Integration',
-  'Real-Time Systems',
-  'UI/UX Awareness',
-  'Continuous Learning',
-]
+  "Problem Solving",
+  "System Development",
+  "Web Development",
+  "Mobile Development",
+  "Backend Development",
+  "IoT Development",
+  "Embedded Systems",
+  "API Integration",
+  "Database Integration",
+  "Real-Time Systems",
+  "UI/UX Awareness",
+  "Continuous Learning",
+];
 
 const currentlyLearning = [
-  {
-    label: 'Python',
-    description: 'Scripting, automation, backend development, and AI-related applications.',
-  },
-  {
-    label: 'Cloud Computing',
-    description: 'Cloud infrastructure, services, deployment, scalability, and serverless concepts.',
-  },
-  {
-    label: 'APIs & API Development',
-    description: 'REST API design, authentication, authorization, security, and external service integration.',
-  },
-  {
-    label: 'Backend Architecture',
-    description: 'Scalable systems, WebSockets, caching, message queues, event-driven architecture, and microservices.',
-  },
-  {
-    label: 'DevOps',
-    description: 'Linux, Docker, CI/CD, GitHub Actions, automated deployment, monitoring, and infrastructure.',
-  },
-  {
-    label: 'AI Integration',
-    description: 'AI APIs, LLM integration, chatbots, structured responses, tool calling, and AI-powered features.',
-  },
-  {
-    label: 'AI Automation',
-    description: 'Automating workflows, data processing, API orchestration, and developer tasks with AI.',
-  },
-  {
-    label: 'Modern AI Technologies',
-    description: 'LLMs, RAG, embeddings, vector databases, AI agents, and agentic workflows.',
-  },
-]
+  "Python",
+  "Cloud Computing",
+  "APIs & API Development",
+  "Backend Architecture",
+  "DevOps",
+  "AI Integration",
+  "AI Automation",
+  "Modern AI Technologies",
+];
 
 const hobbies = [
-  { label: 'Working Out', icon: 'fitness_center' },
-  { label: 'Movies & Series', icon: 'movie' },
-  { label: 'Anime', icon: 'animation' },
-  { label: 'Studying', icon: 'menu_book' },
-]
+  { label: "Working Out", icon: "fitness_center" },
+  { label: "Movies & Series", icon: "movie" },
+  { label: "Anime", icon: "animation" },
+  { label: "Studying", icon: "menu_book" },
+];
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative flex flex-col w-full px-4 lg:px-[48px] py-24">
+    <section
+      id="about"
+      className="relative flex flex-col w-full px-4 lg:px-[48px] py-24"
+    >
       <div className="max-w-[1200px] mx-auto w-full flex flex-col gap-16">
-
         {/* Top Row: About Text + Photo */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6">
           {/* Left Column */}
-          <div className="lg:col-span-7 flex flex-col gap-8">
+          <div className="lg:col-span-7 flex flex-col gap-8 order-2 lg:order-1">
             <div className="flex items-center gap-4">
-              <h2 className="font-display-lg text-display-lg text-primary">About</h2>
+              <h2 className="font-display-lg text-display-lg text-primary">
+                About
+              </h2>
               <div className="h-[1px] flex-1 bg-outline-variant" />
             </div>
 
             <p className="font-body-lg text-body-lg text-on-surface">
-              I am currently pursuing a degree in Information Technology at Quezon City University, driven by a deep fascination with how physical hardware interacts with software systems. My core interest lies in the Internet of Things (IoT), where I explore the bridge between embedded devices and cloud-based applications. I approach every project with an engineering mindset—prioritizing clean architecture, efficient data flow, and reliable execution.
+              I am currently pursuing a degree in Information Technology at
+              Quezon City University, driven by a deep fascination with how
+              physical hardware interacts with software systems. My core
+              interest lies in the Internet of Things (IoT), where I explore the
+              bridge between embedded devices and cloud-based applications. I
+              approach every project with an engineering mindset—prioritizing
+              clean architecture, efficient data flow, and reliable execution.
             </p>
 
             {/* Education Timeline */}
@@ -81,9 +67,15 @@ export default function AboutSection() {
                   <div className="w-2 h-2 rounded-full bg-primary" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-technical-label text-technical-label text-primary">2023 — 2027</span>
-                  <h3 className="font-headline-md text-headline-md text-on-surface mt-1">Quezon City University (QCU)</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">Bachelor of Science in Information Technology (BSIT)</p>
+                  <span className="font-technical-label text-technical-label text-primary">
+                    2023 — 2027
+                  </span>
+                  <h3 className="font-headline-md text-headline-md text-on-surface mt-1">
+                    Quezon City University (QCU)
+                  </h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    Bachelor of Science in Information Technology (BSIT)
+                  </p>
                 </div>
               </div>
 
@@ -93,21 +85,28 @@ export default function AboutSection() {
                   <div className="w-2 h-2 rounded-full bg-outline-variant" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-technical-label text-technical-label text-on-surface-variant">2021 — 2023</span>
-                  <h3 className="font-headline-md text-headline-md text-on-surface mt-1">Asian Institute of Computer Studies (AICS)</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">Senior High School — STEM Strand</p>
+                  <span className="font-technical-label text-technical-label text-on-surface-variant">
+                    2021 — 2023
+                  </span>
+                  <h3 className="font-headline-md text-headline-md text-on-surface mt-1">
+                    Asian Institute of Computer Studies (AICS)
+                  </h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    Senior High School — STEM Strand
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right Column - My Photo */}
-          <div className="lg:col-span-5 flex items-start justify-center relative pt-4">
+          <div className="lg:col-span-5 flex items-start justify-center relative pt-4 order-1 lg:order-2">
             <div
               className="absolute inset-0 opacity-[0.03] pointer-events-none"
               style={{
-                backgroundImage: 'radial-gradient(circle at 2px 2px, #001947 1px, transparent 0)',
-                backgroundSize: '24px 24px',
+                backgroundImage:
+                  "radial-gradient(circle at 2px 2px, #001947 1px, transparent 0)",
+                backgroundSize: "24px 24px",
               }}
             />
             <div className="relative group">
@@ -126,7 +125,9 @@ export default function AboutSection() {
 
               {/* Name label */}
               <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-surface border border-outline-variant rounded-lg shadow-sm">
-                <span className="font-code-sm text-code-sm text-primary whitespace-nowrap">John Kenneth Pitel</span>
+                <span className="font-code-sm text-code-sm text-primary whitespace-nowrap">
+                  John Kenneth Pitel
+                </span>
               </div>
             </div>
           </div>
@@ -157,19 +158,17 @@ export default function AboutSection() {
             Currently Learning
           </h3>
           <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl">
-            Technologies and concepts I'm actively studying and experimenting with.
+            Technologies and concepts I'm actively studying and experimenting
+            with.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {currentlyLearning.map((item) => (
               <div
-                key={item.label}
-                className="flex flex-col gap-2 p-4 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-primary/30 transition-colors group"
+                key={item}
+                className="flex items-center p-4 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-primary/30 transition-colors group"
               >
                 <span className="font-technical-label text-[12px] text-primary group-hover:text-primary transition-colors">
-                  {item.label}
-                </span>
-                <span className="font-body-md text-[12px] text-on-surface-variant leading-relaxed">
-                  {item.description}
+                  {item}
                 </span>
               </div>
             ))}
@@ -198,8 +197,7 @@ export default function AboutSection() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
-  )
+  );
 }

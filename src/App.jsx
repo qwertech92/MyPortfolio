@@ -4,8 +4,10 @@ import ShaderBackground from './components/ShaderBackground'
 import HeroSection from './components/HeroSection'
 import AboutSection from './components/AboutSection'
 import SkillsSection from './components/SkillsSection'
+import CertificationsSection from './components/CertificationsSection'
 import ProjectsSection from './components/ProjectsSection'
 import ContactSection from './components/ContactSection'
+import SendMessageSection from './components/SendMessageSection'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -36,8 +38,10 @@ export default function App() {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
+        <CertificationsSection />
         <ProjectsSection />
         <ContactSection />
+        <SendMessageSection />
       </main>
       <Footer />
     </div>
